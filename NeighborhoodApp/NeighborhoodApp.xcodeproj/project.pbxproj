@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -113,7 +113,6 @@
 				F957D3B868446854BC723982 /* Pods-NeighborhoodAppTests.debug.xcconfig */,
 				ED72E141B6533EA7AEC97789 /* Pods-NeighborhoodAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -142,14 +141,10 @@
 		C547A8FB25A5030A00441BC0 /* NeighborhoodApp */ = {
 			isa = PBXGroup;
 			children = (
-				C547A8FC25A5030A00441BC0 /* AppDelegate.swift */,
-				C547A8FE25A5030A00441BC0 /* SceneDelegate.swift */,
-				C547A90025A5030A00441BC0 /* ViewController.swift */,
-				C547A90225A5030A00441BC0 /* Main.storyboard */,
-				C547A90525A5030B00441BC0 /* Assets.xcassets */,
-				C547A90725A5030B00441BC0 /* LaunchScreen.storyboard */,
-				C547A90A25A5030B00441BC0 /* Info.plist */,
-				C547A92F25A503D800441BC0 /* GoogleService-Info.plist */,
+				C5F5AA4A25A5163100651AAB /* Setup Code */,
+				C5F5AA4B25A5164400651AAB /* View Controllers */,
+				C5F5AA4C25A5165700651AAB /* Storyboard */,
+				C5F5AA4D25A5168200651AAB /* Misc */,
 			);
 			path = NeighborhoodApp;
 			sourceTree = "<group>";
@@ -170,6 +165,42 @@
 				C547A92025A5030B00441BC0 /* Info.plist */,
 			);
 			path = NeighborhoodAppUITests;
+			sourceTree = "<group>";
+		};
+		C5F5AA4A25A5163100651AAB /* Setup Code */ = {
+			isa = PBXGroup;
+			children = (
+				C547A8FC25A5030A00441BC0 /* AppDelegate.swift */,
+				C547A8FE25A5030A00441BC0 /* SceneDelegate.swift */,
+			);
+			path = "Setup Code";
+			sourceTree = "<group>";
+		};
+		C5F5AA4B25A5164400651AAB /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C547A90025A5030A00441BC0 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C5F5AA4C25A5165700651AAB /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C547A90225A5030A00441BC0 /* Main.storyboard */,
+				C547A90725A5030B00441BC0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		C5F5AA4D25A5168200651AAB /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				C547A92F25A503D800441BC0 /* GoogleService-Info.plist */,
+				C547A90A25A5030B00441BC0 /* Info.plist */,
+				C547A90525A5030B00441BC0 /* Assets.xcassets */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
