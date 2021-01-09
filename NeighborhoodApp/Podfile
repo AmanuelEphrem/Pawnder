@@ -7,7 +7,6 @@ target 'NeighborhoodApp' do
 
   # Pods for NeighborhoodApp
   pod 'Firebase/Firestore'
-  pod 'Firebase/Storage'
 
   target 'NeighborhoodAppTests' do
     inherit! :search_paths
