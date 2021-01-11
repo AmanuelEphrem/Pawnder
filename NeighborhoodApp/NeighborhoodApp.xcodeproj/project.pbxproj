@@ -16,6 +16,11 @@
 		C51E538A25A904BE0065FF52 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = C51E538725A904BE0065FF52 /* location.png */; };
 		C51E539225A9107B0065FF52 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51E539125A9107B0065FF52 /* HomeViewController.swift */; };
 		C51E539725A914F10065FF52 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51E539625A914F10065FF52 /* AccountViewController.swift */; };
+		C531ED3325AB8740005FBE33 /* PersonalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531ED3225AB8740005FBE33 /* PersonalData.swift */; };
+		C531ED3B25AB8AF7005FBE33 /* PinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531ED3A25AB8AF7005FBE33 /* PinData.swift */; };
+		C531ED4025AB8B6E005FBE33 /* NeighborhoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531ED3F25AB8B6E005FBE33 /* NeighborhoodData.swift */; };
+		C531ED4525AB8E31005FBE33 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531ED4425AB8E31005FBE33 /* LoginViewController.swift */; };
+		C531ED4A25AB9C7B005FBE33 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531ED4925AB9C7B005FBE33 /* LocationData.swift */; };
 		C547A8FD25A5030A00441BC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C547A8FC25A5030A00441BC0 /* AppDelegate.swift */; };
 		C547A8FF25A5030A00441BC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C547A8FE25A5030A00441BC0 /* SceneDelegate.swift */; };
 		C547A90425A5030A00441BC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C547A90225A5030A00441BC0 /* Main.storyboard */; };
@@ -56,6 +61,11 @@
 		C51E538725A904BE0065FF52 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		C51E539125A9107B0065FF52 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C51E539625A914F10065FF52 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		C531ED3225AB8740005FBE33 /* PersonalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalData.swift; sourceTree = "<group>"; };
+		C531ED3A25AB8AF7005FBE33 /* PinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinData.swift; sourceTree = "<group>"; };
+		C531ED3F25AB8B6E005FBE33 /* NeighborhoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodData.swift; sourceTree = "<group>"; };
+		C531ED4425AB8E31005FBE33 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C531ED4925AB9C7B005FBE33 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		C547A8F925A5030A00441BC0 /* NeighborhoodApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeighborhoodApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C547A8FC25A5030A00441BC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C547A8FE25A5030A00441BC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +155,17 @@
 			path = "Home Image";
 			sourceTree = "<group>";
 		};
+		C531ED3125AB870A005FBE33 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C531ED3225AB8740005FBE33 /* PersonalData.swift */,
+				C531ED3A25AB8AF7005FBE33 /* PinData.swift */,
+				C531ED3F25AB8B6E005FBE33 /* NeighborhoodData.swift */,
+				C531ED4925AB9C7B005FBE33 /* LocationData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		C547A8F025A5030A00441BC0 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +191,7 @@
 		C547A8FB25A5030A00441BC0 /* NeighborhoodApp */ = {
 			isa = PBXGroup;
 			children = (
+				C531ED3125AB870A005FBE33 /* Data */,
 				C51E536C25A9025A0065FF52 /* Image Assets */,
 				C5F5AA4A25A5163100651AAB /* Setup Code */,
 				C5F5AA4B25A5164400651AAB /* View Controllers */,
@@ -213,6 +235,7 @@
 			children = (
 				C51E539125A9107B0065FF52 /* HomeViewController.swift */,
 				C51E539625A914F10065FF52 /* AccountViewController.swift */,
+				C531ED4425AB8E31005FBE33 /* LoginViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -469,10 +492,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C531ED4A25AB9C7B005FBE33 /* LocationData.swift in Sources */,
 				C547A8FD25A5030A00441BC0 /* AppDelegate.swift in Sources */,
 				C547A8FF25A5030A00441BC0 /* SceneDelegate.swift in Sources */,
 				C51E539725A914F10065FF52 /* AccountViewController.swift in Sources */,
 				C51E539225A9107B0065FF52 /* HomeViewController.swift in Sources */,
+				C531ED4525AB8E31005FBE33 /* LoginViewController.swift in Sources */,
+				C531ED4025AB8B6E005FBE33 /* NeighborhoodData.swift in Sources */,
+				C531ED3325AB8740005FBE33 /* PersonalData.swift in Sources */,
+				C531ED3B25AB8AF7005FBE33 /* PinData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

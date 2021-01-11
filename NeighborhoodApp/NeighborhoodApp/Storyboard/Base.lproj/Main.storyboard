@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NeighborhoodApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="NeighborhoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,13 +30,16 @@
                                     <color key="titleColor" red="0.0" green="0.50980392156862742" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="FC9-0b-A00" kind="presentation" modalPresentationStyle="fullScreen" id="uZB-HI-6Sf"/>
+                                    <action selector="enterBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KM5-7p-k7O"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="FC9-0b-A00" kind="presentation" identifier="LoginToMap" modalPresentationStyle="fullScreen" id="Tlb-nR-rrp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,7 +80,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hid-yr-XUB" userLabel="MapTab">
                                 <rect key="frame" x="188" y="813" width="38" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="map.png"/>
+                                <state key="normal" image="map.png"/>
                                 <connections>
                                     <action selector="mapPressed:" destination="FC9-0b-A00" eventType="touchUpInside" id="aqw-tg-dwp"/>
                                 </connections>
@@ -88,6 +91,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hMk-Su-NCj"/>
                     <connections>
+                        <outlet property="mapView" destination="Cpi-76-uTS" id="snj-im-B0h"/>
                         <segue destination="7Sd-Xy-etz" kind="presentation" identifier="MapToAccount" animates="NO" modalPresentationStyle="fullScreen" id="M8B-LO-71u"/>
                     </connections>
                 </viewController>
@@ -147,7 +151,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tpx-4z-egK"/>
+        <segue reference="Tlb-nR-rrp"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="account.png" width="43" height="43"/>

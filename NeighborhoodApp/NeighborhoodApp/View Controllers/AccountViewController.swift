@@ -16,7 +16,7 @@ class AccountViewController: UIViewController {
     }
     
     @IBAction func mapPressed(_ sender: Any) {
-        performSegue(withIdentifier: "AccountToMap", sender: nil)
+        self.presentingViewController?.dismiss(animated: false, completion: nil)
     }
     
 }
