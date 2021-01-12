@@ -54,7 +54,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nav2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Swy-E0-8Mf">
-                                <rect key="frame" x="-6" y="798" width="426" height="143"/>
+                                <rect key="frame" x="-6" y="797" width="426" height="143"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cpi-76-uTS">
@@ -72,13 +72,17 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Id8-ot-QJ9" userLabel="AccountTab">
                                 <rect key="frame" x="344" y="815" width="50" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="account.png"/>
+                                <state key="normal" image="account.png"/>
                                 <connections>
                                     <action selector="accountPressed:" destination="FC9-0b-A00" eventType="touchUpInside" id="A2d-Pq-9YH"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="79q-G5-fL0">
+                                <rect key="frame" x="188" y="847" width="38" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hid-yr-XUB" userLabel="MapTab">
-                                <rect key="frame" x="188" y="813" width="38" height="50"/>
+                                <rect key="frame" x="188" y="812" width="38" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="map.png"/>
                                 <connections>
@@ -111,6 +115,10 @@
                                 <rect key="frame" x="-6" y="798" width="426" height="143"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="lN3-MM-XSn">
+                                <rect key="frame" x="347" y="848" width="45" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqj-hh-4RX" userLabel="LocationTab">
                                 <rect key="frame" x="28" y="815" width="50" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -121,14 +129,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="account.png"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHs-QI-9mz" userLabel="MapTab">
-                                <rect key="frame" x="188" y="813" width="38" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="map.png"/>
-                                <connections>
-                                    <action selector="mapPressed:" destination="7Sd-Xy-etz" eventType="touchUpInside" id="TL4-8X-hm7"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account Screen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hk-FR-YHh">
                                 <rect key="frame" x="92" y="252" width="253" height="171"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -136,6 +136,14 @@
                                 <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHs-QI-9mz" userLabel="MapTab">
+                                <rect key="frame" x="192" y="812" width="31" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="map.png"/>
+                                <connections>
+                                    <action selector="mapPressed:" destination="7Sd-Xy-etz" eventType="touchUpInside" id="TL4-8X-hm7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7vU-fZ-81b"/>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -151,9 +159,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tlb-nR-rrp"/>
+        <segue reference="M8B-LO-71u"/>
+        <segue reference="tpx-4z-egK"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Bar.png" width="33" height="1"/>
         <image name="account.png" width="43" height="43"/>
         <image name="location.png" width="56" height="56"/>
         <image name="map.png" width="28" height="41"/>

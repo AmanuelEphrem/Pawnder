@@ -29,6 +29,7 @@
 		C547A91425A5030B00441BC0 /* NeighborhoodAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C547A91325A5030B00441BC0 /* NeighborhoodAppTests.swift */; };
 		C547A91F25A5030B00441BC0 /* NeighborhoodAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C547A91E25A5030B00441BC0 /* NeighborhoodAppUITests.swift */; };
 		C547A93025A503D800441BC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C547A92F25A503D800441BC0 /* GoogleService-Info.plist */; };
+		C5933D2825AE3D1800949C1C /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5933D2725AE3D1800949C1C /* Bar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		C547A91E25A5030B00441BC0 /* NeighborhoodAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodAppUITests.swift; sourceTree = "<group>"; };
 		C547A92025A5030B00441BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C547A92F25A503D800441BC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C5933D2725AE3D1800949C1C /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
 		ED72E141B6533EA7AEC97789 /* Pods-NeighborhoodAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeighborhoodAppTests.release.xcconfig"; path = "Target Support Files/Pods-NeighborhoodAppTests/Pods-NeighborhoodAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		F69B66D74B645987529525D0 /* Pods_NeighborhoodApp_NeighborhoodAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeighborhoodApp_NeighborhoodAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F957D3B868446854BC723982 /* Pods-NeighborhoodAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeighborhoodAppTests.debug.xcconfig"; path = "Target Support Files/Pods-NeighborhoodAppTests/Pods-NeighborhoodAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				C51E538725A904BE0065FF52 /* location.png */,
 				C51E538525A904BC0065FF52 /* map.png */,
 				C51E538025A904050065FF52 /* nav2.png */,
+				C5933D2725AE3D1800949C1C /* Bar.png */,
 			);
 			path = "Home Image";
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				C51E538A25A904BE0065FF52 /* location.png in Resources */,
 				C51E538825A904BE0065FF52 /* map.png in Resources */,
 				C547A90925A5030B00441BC0 /* LaunchScreen.storyboard in Resources */,
+				C5933D2825AE3D1800949C1C /* Bar.png in Resources */,
 				C51E538125A904050065FF52 /* nav2.png in Resources */,
 				C51E538925A904BE0065FF52 /* account.png in Resources */,
 				C547A93025A503D800441BC0 /* GoogleService-Info.plist in Resources */,
