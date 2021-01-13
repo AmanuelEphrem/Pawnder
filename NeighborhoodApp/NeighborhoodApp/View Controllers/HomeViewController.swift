@@ -13,13 +13,19 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()                          
+        super.viewDidLoad()
         //draws neighborhood perimeter
         setNeighborhoodPerimeter(bounds: NeighborhoodData.boundaries, scale: 0.03)
+        
+        //displays neighborhood annotations
+        displayAnnotations()
 
         
             
     }
+    
+  
+    //defines boundaries that represents the users neighborhood
     func setNeighborhoodPerimeter(bounds:[LocationData], scale:Double){
         
         var coords = [CLLocationCoordinate2D]()
@@ -41,6 +47,18 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         recenterMap(scale: scale)
     }
     
+    //defines and displays annotations for users neighborhood
+    func displayAnnotations(){
+        for pin in NeighborhoodData.pins{
+            let annotation = MKPointAnnotation()
+            annotation.title = pin.title
+            annotation.subtitle = pin.description
+            annotation.coordinate = CLLocationCoordinate2D(latitude: pin.locaiton.latitude, longitude: pin.locaiton.longitude)
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    //draws the boundary for users neighborhood
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             //Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
 
@@ -54,22 +72,35 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
 
     }
     
+    //realigns map to users neighborhood
     func recenterMap(scale:Double){
         let cent = CLLocationCoordinate2D(latitude: NeighborhoodData.centerLocation.latitude, longitude: NeighborhoodData.centerLocation.longitude)
         mapView.centerCoordinate = cent
         mapView.setRegion(MKCoordinateRegion(center: cent, span: MKCoordinateSpan(latitudeDelta: scale, longitudeDelta: scale)), animated: true)
     }
     
+    //prints location pressed on map (used for debugging)
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        for touch in touches {
+//            let touchPoint = touch.location(in: mapView)
+//            let location = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+//            print ("\(location.latitude), \(location.longitude)")
+//        }
+//    }
+    
+    //recenter tab pressed
     @IBAction func locationPressed(_ sender: Any) {
         recenterMap(scale: 0.03)
     }
     
-    //shows user account screen
+    //account tab pressed that switches view
     @IBAction func accountPressed(_ sender: Any) {
         performSegue(withIdentifier: "MapToAccount", sender: nil)
     }
     
+    //map tab pressed that switches view
     @IBAction func mapPressed(_ sender: Any) {
+        performSegue(withIdentifier: "MapToPinMake", sender: nil)
     }
     
 }

@@ -20,7 +20,9 @@ class LoginViewController: UIViewController {
     @IBAction func enterBtn(_ sender: Any) {
         retrievePersonalData(completion: {
             self.retrieveNeighborhoodData(completion: {
-                self.performSegue(withIdentifier: "LoginToMap", sender: nil)
+                self.retrievePinData {
+                    self.performSegue(withIdentifier: "LoginToMap", sender: nil)
+                }
             })
         })
     }
@@ -77,5 +79,33 @@ class LoginViewController: UIViewController {
                 print("Document does not exist")
             }
         }
+    }
+    
+    func retrievePinData(completion: @escaping () -> Void){
+        let db = Firestore.firestore()
+        let ref = db.collection("neighborhood").document("beverlyhills").collection("pins")
+        var pins = [PinData]()
+        var title = ""
+        var description = ""
+        var location = [Double]()
+        
+        ref.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                completion()
+            } else {
+                for document in querySnapshot!.documents {
+                    let info = document.data()
+                    title = info["title"] as! String
+                    description = info["description"] as! String
+                    location = info["location"] as! [Double]
+                    pins.append(PinData(title: title, description: description, locaiton: LocationData(latitude: location[0], longitude: location[1])))
+                }
+                NeighborhoodData.pins = pins
+                completion()
+            }
+        }
+
+        
     }
 }

@@ -30,6 +30,7 @@
 		C547A91F25A5030B00441BC0 /* NeighborhoodAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C547A91E25A5030B00441BC0 /* NeighborhoodAppUITests.swift */; };
 		C547A93025A503D800441BC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C547A92F25A503D800441BC0 /* GoogleService-Info.plist */; };
 		C5933D2825AE3D1800949C1C /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5933D2725AE3D1800949C1C /* Bar.png */; };
+		C5D8E05625AF9AA700050EB3 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D8E05525AF9AA700050EB3 /* bar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		C547A92025A5030B00441BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C547A92F25A503D800441BC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5933D2725AE3D1800949C1C /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
+		C5D8E05525AF9AA700050EB3 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
 		ED72E141B6533EA7AEC97789 /* Pods-NeighborhoodAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeighborhoodAppTests.release.xcconfig"; path = "Target Support Files/Pods-NeighborhoodAppTests/Pods-NeighborhoodAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		F69B66D74B645987529525D0 /* Pods_NeighborhoodApp_NeighborhoodAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeighborhoodApp_NeighborhoodAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F957D3B868446854BC723982 /* Pods-NeighborhoodAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeighborhoodAppTests.debug.xcconfig"; path = "Target Support Files/Pods-NeighborhoodAppTests/Pods-NeighborhoodAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		C51E536C25A9025A0065FF52 /* Image Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C5D8E05425AF9A6700050EB3 /* Pin Make */,
 				C51E537F25A903DC0065FF52 /* Home Image */,
 			);
 			path = "Image Assets";
@@ -222,6 +225,14 @@
 				C547A92025A5030B00441BC0 /* Info.plist */,
 			);
 			path = NeighborhoodAppUITests;
+			sourceTree = "<group>";
+		};
+		C5D8E05425AF9A6700050EB3 /* Pin Make */ = {
+			isa = PBXGroup;
+			children = (
+				C5D8E05525AF9AA700050EB3 /* bar.png */,
+			);
+			path = "Pin Make";
 			sourceTree = "<group>";
 		};
 		C5F5AA4A25A5163100651AAB /* Setup Code */ = {
@@ -361,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C51E538A25A904BE0065FF52 /* location.png in Resources */,
+				C5D8E05625AF9AA700050EB3 /* bar.png in Resources */,
 				C51E538825A904BE0065FF52 /* map.png in Resources */,
 				C547A90925A5030B00441BC0 /* LaunchScreen.storyboard in Resources */,
 				C5933D2825AE3D1800949C1C /* Bar.png in Resources */,
