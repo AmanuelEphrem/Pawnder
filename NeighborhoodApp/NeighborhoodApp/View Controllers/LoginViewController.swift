@@ -7,42 +7,116 @@
 
 import UIKit
 import Firebase
+import MHLoadingButton
 
-class LoginViewController: UIViewController {
-
+class LoginViewController: UIViewController, UITextFieldDelegate{
+    //instance data that represents user inputted values
+    private var user = ""
+    private var pass = ""
+    //instance data that represents whether user login is validated
+    private var isAuthorized = false
+    
+    let btnLoading = LoadingButton(text: "Enter", textColor: .white, bgColor: UIColor(red: 247, green: 247, blue: 247, alpha: 0))
+   
+    //outlets from storyboard
+    @IBOutlet weak var enterOutlet: UIButton!
+    @IBOutlet weak var usernameTextfield: UITextField!
+    @IBOutlet weak var passwordTextfield: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //creates loading button
+        btnLoading.frame = CGRect(x: 78, y: 411, width: 40, height: 40)
+        btnLoading.indicator = MaterialLoadingIndicator(color: .black)
+        btnLoading.isUserInteractionEnabled = false
+        btnLoading.showLoader(userInteraction: true)
+        btnLoading.alpha = 0
+        self.view.addSubview(btnLoading)
+        
+        //delegates
+        usernameTextfield.delegate = self
+        passwordTextfield.delegate = self
+        
+        }
+    
+    @IBAction func viewTap(_ sender: Any) {
+        view.endEditing(true)
+        
+    }
+    
+    
+    func startAnimation(){
+        btnLoading.alpha = 1
+        enterOutlet.alpha = 0
+    }
+    func endAnimation(){
+        enterOutlet.alpha = 1
+        btnLoading.alpha = 0
     }
     
     
     @IBAction func enterBtn(_ sender: Any) {
+        
+
+        //reads textfield values
+        user = usernameTextfield.text!
+        pass = passwordTextfield.text!
+        
+        //checks if login is correct
+        //user is granted access if and only if login is correct
         retrievePersonalData(completion: {
-            self.retrieveNeighborhoodData(completion: {
-                self.retrievePinData {
-                    self.performSegue(withIdentifier: "LoginToMap", sender: nil)
-                }
-            })
+            print(self.isAuthorized)
+            if(self.isAuthorized){
+                //starts animation if access is granted
+                self.startAnimation()
+                self.retrieveNeighborhoodData(completion: {
+                    self.retrievePinData {
+                        self.performSegue(withIdentifier: "LoginToMap", sender: nil)
+                        self.endAnimation()
+                    }
+                })
+            }
         })
     }
     
+    //downloads user data
+    //if user credentials are correct, data is saved and authorized to enter
+    //else the user is not authorized and data is not saved
     func retrievePersonalData(completion: @escaping () -> Void){
+        
+        let seconds = 100.0
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            // Put your code which should be executed with a delay here
+        }
+        
         let db = Firestore.firestore()
-        let docRef = db.collection("users").document("bobby")
+        let docRef = db.collection("users").document(user)
         
         //retrieves personal data
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data()!
+                
+                //checks login
+                let tempPassword = dataDescription["password"]! as! String
+                if(self.pass != tempPassword){
+                    completion()
+                    return
+                }
                 //saves personal data
                 PersonalData.username = dataDescription["username"]! as! String
-                PersonalData.password = dataDescription["password"]! as! String
+                PersonalData.password = tempPassword
                 PersonalData.neighborhoodID = dataDescription["neighborhoodID"]! as! Int
                 PersonalData.personalPins = dataDescription["pins"] as! [Int]
+                
+                //validates user
+                self.isAuthorized = true
                 completion()
             } else {
-                print("Document does not exist")
+                //denies access if document is not found
+                self.isAuthorized = false
+                completion()
             }
         }
     }
@@ -106,6 +180,10 @@ class LoginViewController: UIViewController {
             }
         }
 
-        
     }
+    
+    @IBAction func createAccountBtn(_ sender: Any) {
+        performSegue(withIdentifier: "LoginToCreateAccount", sender: nil)
+    }
+    
 }
