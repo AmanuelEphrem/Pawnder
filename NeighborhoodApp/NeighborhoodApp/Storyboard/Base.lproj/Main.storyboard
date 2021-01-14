@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -196,7 +197,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aPi-Uk-2AE">
-                                <rect key="frame" x="68" y="319" width="278" height="41"/>
+                                <rect key="frame" x="68" y="319" width="250" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -242,6 +243,30 @@
                                 <rect key="frame" x="68" y="396" width="278" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T9X-KP-AGE" userLabel="usernameCheck">
+                                <rect key="frame" x="318" y="332" width="20" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemGreenColor"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZAY-xw-5Hu" userLabel="passwordCheck">
+                                <rect key="frame" x="318" y="378" width="20" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemGreenColor"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4OY-5C-IuF" userLabel="usernameX">
+                                <rect key="frame" x="321" y="330" width="14" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pf2-zE-X7B" userLabel="passwordX">
+                                <rect key="frame" x="321" y="376" width="14" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zuw-jt-vvE"/>
                         <color key="backgroundColor" red="0.96852236989999996" green="0.96868807079999997" blue="0.96851199870000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -252,8 +277,12 @@
                     </view>
                     <connections>
                         <outlet property="enterOutlet" destination="GKv-Mm-EDh" id="Ue0-H3-jX0"/>
+                        <outlet property="passwordCheck" destination="ZAY-xw-5Hu" id="Hcw-zc-0Zt"/>
                         <outlet property="passwordTextfield" destination="GUp-7c-rJd" id="Y5t-FG-AFu"/>
+                        <outlet property="passwordX" destination="Pf2-zE-X7B" id="241-Wy-HpJ"/>
+                        <outlet property="usernameCheck" destination="T9X-KP-AGE" id="Gmm-BC-T1e"/>
                         <outlet property="usernameTextfield" destination="aPi-Uk-2AE" id="ncd-i2-7EE"/>
+                        <outlet property="usernameX" destination="4OY-5C-IuF" id="LvD-Is-63Z"/>
                         <segue destination="FC9-0b-A00" kind="presentation" identifier="LoginToMap" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="vaB-NZ-5Di"/>
                         <segue destination="fAf-hE-Ttv" kind="presentation" identifier="LoginToCreateAccount" modalPresentationStyle="automatic" id="map-Wy-uNR"/>
                     </connections>
@@ -287,14 +316,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EAA-OI-at4">
-                                <rect key="frame" x="68" y="319" width="278" height="41"/>
+                                <rect key="frame" x="68" y="319" width="244" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TQn-P7-cwE">
-                                <rect key="frame" x="68" y="365" width="278" height="41"/>
+                                <rect key="frame" x="68" y="365" width="244" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -315,13 +344,43 @@
                                     <action selector="submitBtn:" destination="fAf-hE-Ttv" eventType="touchUpInside" id="nsB-Ps-hHt"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfP-hd-WUT" userLabel="usernameX">
+                                <rect key="frame" x="320" y="328" width="14" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoC-XP-vOb" userLabel="passwordX">
+                                <rect key="frame" x="320" y="374" width="14" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eXE-0K-P3g"/>
                         <color key="backgroundColor" red="0.96852236989999996" green="0.96868807079999997" blue="0.96851199870000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Eao-5X-qUr" appends="YES" id="2VK-c5-KdB"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="FUM-fs-PPO"/>
+                    <connections>
+                        <outlet property="passwordTextField" destination="TQn-P7-cwE" id="15L-ex-j9Y"/>
+                        <outlet property="passwordX" destination="PoC-XP-vOb" id="8bs-jm-Mcg"/>
+                        <outlet property="submitOutlet" destination="Sqa-6O-Z5J" id="Y6P-AK-yoy"/>
+                        <outlet property="usernameTextField" destination="EAA-OI-at4" id="pcZ-JA-meg"/>
+                        <outlet property="usernameX" destination="QfP-hd-WUT" id="BKi-gS-DEZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uzn-YE-21H" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Eao-5X-qUr">
+                    <connections>
+                        <action selector="screenTap:" destination="fAf-hE-Ttv" id="UK1-vq-Ow8"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-107.24637681159422" y="776.78571428571422"/>
         </scene>
@@ -330,10 +389,17 @@
         <image name="Bar.png" width="33" height="1"/>
         <image name="account.png" width="43" height="43"/>
         <image name="bar.png" width="310" height="1"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="differentBar.png" width="310" height="1"/>
         <image name="location.png" width="56" height="56"/>
         <image name="map.png" width="28" height="41"/>
         <image name="nav2.png" width="414" height="141"/>
         <image name="or.png" width="350" height="20"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

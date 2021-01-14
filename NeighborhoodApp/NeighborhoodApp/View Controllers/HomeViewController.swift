@@ -20,8 +20,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         //displays neighborhood annotations
         displayAnnotations()
 
-        
-            
+
     }
     
   
