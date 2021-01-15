@@ -108,10 +108,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     @IBAction func enterBtn(_ sender: Any) {
         //resets UI
         resetTextfieldUI()
-
+        ///
+        ///
+        ///
+        ///edited here
+        ///
+        ///
+        ///
         //reads textfield values
-        user = usernameTextfield.text!.lowercased()
-        pass = passwordTextfield.text!
+        //user = usernameTextfield.text!.lowercased() ///uncomment
+        //pass = passwordTextfield.text!  ///uncomment
+        user = "bobby"
+        pass = "stevenwills980"
         
         //validates username accordance with firebase criterion
         if(validateUsernameInput(username: user) == false){
@@ -158,7 +166,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 //saves personal data
                 PersonalData.username = dataDescription["username"]! as! String
                 PersonalData.password = tempPassword
-                PersonalData.neighborhoodID = dataDescription["neighborhoodID"]! as! Int
+                PersonalData.neighborhoodID = dataDescription["neighborhoodID"]! as! String
                 PersonalData.personalPins = dataDescription["pins"] as! [Int]
                 
                 //validates user
@@ -174,7 +182,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     func retrieveNeighborhoodData(completion: @escaping () -> Void){
         let db = Firestore.firestore()
-        let ref = db.collection("neighborhood").document("beverlyhills")
+        let ref = db.collection("neighborhood").document(PersonalData.neighborhoodID)
 
         //retrives neighborhood data
         ref.getDocument { (document, error) in
@@ -213,6 +221,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         var pins = [PinData]()
         var title = ""
         var description = ""
+        var id = ""
         var location = [Double]()
         
         ref.getDocuments() { (querySnapshot, err) in
@@ -224,9 +233,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                     let info = document.data()
                     title = info["title"] as! String
                     description = info["description"] as! String
+                    id = info["ID"] as! String
                     location = info["location"] as! [Double]
-                    pins.append(PinData(title: title, description: description, locaiton: LocationData(latitude: location[0], longitude: location[1])))
+                    pins.append(PinData(title: title, description: description, ID: id, locaiton: LocationData(latitude: location[0], longitude: location[1])))
                 }
+                print("number of saved pins \(pins.count)")
                 NeighborhoodData.pins = pins
                 completion()
             }

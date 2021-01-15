@@ -27,5 +27,6 @@ class NeighborhoodData: NSObject {
     public static var description = ""
     public static var organizer = ""
     public static var pins = [PinData]()
+    public static var name = ""
 
 }

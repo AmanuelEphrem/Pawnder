@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         //draws neighborhood perimeter
         setNeighborhoodPerimeter(bounds: NeighborhoodData.boundaries, scale: 0.03)
-        
+                
         //displays neighborhood annotations
         displayAnnotations()
 
@@ -49,6 +49,10 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
     //defines and displays annotations for users neighborhood
     func displayAnnotations(){
         for pin in NeighborhoodData.pins{
+            print(pin.title)
+            print(pin.locaiton.latitude)
+            print(pin.locaiton.longitude)
+            print("---")
             let annotation = MKPointAnnotation()
             annotation.title = pin.title
             annotation.subtitle = pin.description
@@ -83,9 +87,12 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
 //        for touch in touches {
 //            let touchPoint = touch.location(in: mapView)
 //            let location = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-//            print ("\(location.latitude), \(location.longitude)")
+//            print(location.latitude)
+//            print(location.longitude)
+//
 //        }
 //    }
+    
     
     //recenter tab pressed
     @IBAction func locationPressed(_ sender: Any) {

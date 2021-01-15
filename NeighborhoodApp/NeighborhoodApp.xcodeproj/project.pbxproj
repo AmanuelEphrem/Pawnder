@@ -30,6 +30,7 @@
 		C547A91F25A5030B00441BC0 /* NeighborhoodAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C547A91E25A5030B00441BC0 /* NeighborhoodAppUITests.swift */; };
 		C547A93025A503D800441BC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C547A92F25A503D800441BC0 /* GoogleService-Info.plist */; };
 		C5933D2825AE3D1800949C1C /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5933D2725AE3D1800949C1C /* Bar.png */; };
+		C59A267925B1388000A5C593 /* MakePinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59A267825B1388000A5C593 /* MakePinViewController.swift */; };
 		C5D8E05C25AFB88300050EB3 /* or.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D8E05B25AFB88300050EB3 /* or.png */; };
 		C5D8E06925AFBBDF00050EB3 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */; };
 		C5D8E07325AFE67900050EB3 /* differentBar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D8E07225AFE67900050EB3 /* differentBar.png */; };
@@ -85,6 +86,7 @@
 		C547A92025A5030B00441BC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C547A92F25A503D800441BC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C5933D2725AE3D1800949C1C /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
+		C59A267825B1388000A5C593 /* MakePinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePinViewController.swift; sourceTree = "<group>"; };
 		C5D8E05B25AFB88300050EB3 /* or.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = or.png; sourceTree = "<group>"; };
 		C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		C5D8E07225AFE67900050EB3 /* differentBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = differentBar.png; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				C51E539625A914F10065FF52 /* AccountViewController.swift */,
 				C531ED4425AB8E31005FBE33 /* LoginViewController.swift */,
 				C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */,
+				C59A267825B1388000A5C593 /* MakePinViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				C531ED4525AB8E31005FBE33 /* LoginViewController.swift in Sources */,
 				C531ED4025AB8B6E005FBE33 /* NeighborhoodData.swift in Sources */,
 				C531ED3325AB8740005FBE33 /* PersonalData.swift in Sources */,
+				C59A267925B1388000A5C593 /* MakePinViewController.swift in Sources */,
 				C531ED3B25AB8AF7005FBE33 /* PinData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

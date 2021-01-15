@@ -10,6 +10,6 @@ import UIKit
 class PersonalData: NSObject {
     public static var username = ""
     public static var password = ""
-    public static var neighborhoodID = -1
+    public static var neighborhoodID = ""
     public static var personalPins = [Int]()
 }

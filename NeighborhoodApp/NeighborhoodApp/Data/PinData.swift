@@ -10,6 +10,7 @@ import Foundation
 struct PinData{
     var title:String
     var description:String
+    var ID:String
     var locaiton:LocationData
 }
 
