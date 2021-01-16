@@ -216,33 +216,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     
     func retrievePinData(completion: @escaping () -> Void){
-        let db = Firestore.firestore()
-        let ref = db.collection("neighborhood").document("beverlyhills").collection("pins")
-        var pins = [PinData]()
-        var title = ""
-        var description = ""
-        var id = ""
-        var location = [Double]()
-        
-        ref.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-                completion()
-            } else {
-                for document in querySnapshot!.documents {
-                    let info = document.data()
-                    title = info["title"] as! String
-                    description = info["description"] as! String
-                    id = info["ID"] as! String
-                    location = info["location"] as! [Double]
-                    pins.append(PinData(title: title, description: description, ID: id, locaiton: LocationData(latitude: location[0], longitude: location[1])))
-                }
-                print("number of saved pins \(pins.count)")
-                NeighborhoodData.pins = pins
-                completion()
-            }
-        }
-
+//        let db = Firestore.firestore()
+//        let ref = db.collection("neighborhood").document("beverlyhills").collection("pins")
+//        var pins = [PinData]()
+//        var title = ""
+//        var description = ""
+//        var id = ""
+//        var location = [Double]()
+//
+//        ref.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//                completion()
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    let info = document.data()
+//                    title = info["title"] as! String
+//                    description = info["description"] as! String
+//                    id = info["ID"] as! String
+//                    location = info["location"] as! [Double]
+//                    pins.append(PinData(title: title, description: description, ID: id, locaiton: LocationData(latitude: location[0], longitude: location[1])))
+//                }
+//                NeighborhoodData.pins = pins
+//                completion()
+//            }
+//        }
+        completion()
     }
     
     @IBAction func createAccountBtn(_ sender: Any) {

@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 class HomeViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -16,14 +17,62 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         //draws neighborhood perimeter
         setNeighborhoodPerimeter(bounds: NeighborhoodData.boundaries, scale: 0.03)
-                
-        //displays neighborhood annotations
-        displayAnnotations()
-
-
+        
+        //listens for old and new pins
+        pinListener()
+    }
+     
+/*fetches pins from database in real-time*/
+    //setup database listener
+    func pinListener(){
+        retrievePins {
+            //adds pins to map
+            self.displayAnnotations()
+        }
+        
+    }
+    //updates NeighborhoodData class with pin data
+    private func retrievePins(completion: @escaping () -> Void){
+        let db = Firestore.firestore()
+        var title:String = ""
+        var description:String = ""
+        var id:String = ""
+        var location:[Double] = [-5.0,-6.0]
+        
+        db.collection("neighborhood").document(PersonalData.neighborhoodID).collection("pins").addSnapshotListener { querySnapshot, error in
+                guard let snapshot = querySnapshot else {
+                    print("Error retrieving pins")
+                    return
+                }
+                snapshot.documentChanges.forEach { diff in
+                    if (diff.type == .added ) {
+                        //retrieves data
+                        let info = diff.document.data()
+                        title = info["title"] as! String
+                        description = info["description"] as! String
+                        id = info["ID"] as! String
+                        location = info["location"] as! [Double]
+                        
+                        //sets data
+                        NeighborhoodData.pins.append(PinData(title: title, description: description, ID: id, locaiton: LocationData(latitude: location[0], longitude: location[1])))
+                    }
+                }
+            completion()
+            }
+        
+    }
+    //defines and displays annotations for users neighborhood
+    private func displayAnnotations(){
+        for pin in NeighborhoodData.pins{
+            let annotation = MKPointAnnotation()
+            annotation.title = pin.title
+            annotation.subtitle = pin.description
+            annotation.coordinate = CLLocationCoordinate2D(latitude: pin.locaiton.latitude, longitude: pin.locaiton.longitude)
+            mapView.addAnnotation(annotation)
+        }
     }
     
-  
+/*implements boundary for neighborhood*/
     //defines boundaries that represents the users neighborhood
     func setNeighborhoodPerimeter(bounds:[LocationData], scale:Double){
         
@@ -45,22 +94,6 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         //sets map to center of neighborhood
         recenterMap(scale: scale)
     }
-    
-    //defines and displays annotations for users neighborhood
-    func displayAnnotations(){
-        for pin in NeighborhoodData.pins{
-            print(pin.title)
-            print(pin.locaiton.latitude)
-            print(pin.locaiton.longitude)
-            print("---")
-            let annotation = MKPointAnnotation()
-            annotation.title = pin.title
-            annotation.subtitle = pin.description
-            annotation.coordinate = CLLocationCoordinate2D(latitude: pin.locaiton.latitude, longitude: pin.locaiton.longitude)
-            mapView.addAnnotation(annotation)
-        }
-    }
-    
     //draws the boundary for users neighborhood
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             //Return an `MKPolylineRenderer` for the `MKPolyline` in the `MKMapViewDelegate`s method
@@ -74,7 +107,6 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
             fatalError("Something wrong in renderfor function...")
 
     }
-    
     //realigns map to users neighborhood
     func recenterMap(scale:Double){
         let cent = CLLocationCoordinate2D(latitude: NeighborhoodData.centerLocation.latitude, longitude: NeighborhoodData.centerLocation.longitude)
@@ -82,28 +114,15 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         mapView.setRegion(MKCoordinateRegion(center: cent, span: MKCoordinateSpan(latitudeDelta: scale, longitudeDelta: scale)), animated: true)
     }
     
-    //prints location pressed on map (used for debugging)
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        for touch in touches {
-//            let touchPoint = touch.location(in: mapView)
-//            let location = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-//            print(location.latitude)
-//            print(location.longitude)
-//
-//        }
-//    }
-    
-    
+/*defines actions for tab icons*/
     //recenter tab pressed
     @IBAction func locationPressed(_ sender: Any) {
         recenterMap(scale: 0.03)
     }
-    
     //account tab pressed that switches view
     @IBAction func accountPressed(_ sender: Any) {
         performSegue(withIdentifier: "MapToAccount", sender: nil)
     }
-    
     //map tab pressed that switches view
     @IBAction func mapPressed(_ sender: Any) {
         performSegue(withIdentifier: "MapToPinMake", sender: nil)
