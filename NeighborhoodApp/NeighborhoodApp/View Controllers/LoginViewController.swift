@@ -134,10 +134,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 //starts animation if access is granted
                 self.startLoadAnimation()
                 self.retrieveNeighborhoodData(completion: {
-                    self.retrievePinData {
-                        self.performSegue(withIdentifier: "LoginToMap", sender: nil)
-                        self.endLoadAnimation()
-                    }
+                    self.performSegue(withIdentifier: "LoginToMap", sender: nil)
+                    self.endLoadAnimation()
                 })
             }
         })
@@ -213,35 +211,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 print("Document does not exist")
             }
         }
-    }
-    
-    func retrievePinData(completion: @escaping () -> Void){
-//        let db = Firestore.firestore()
-//        let ref = db.collection("neighborhood").document("beverlyhills").collection("pins")
-//        var pins = [PinData]()
-//        var title = ""
-//        var description = ""
-//        var id = ""
-//        var location = [Double]()
-//
-//        ref.getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//                completion()
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    let info = document.data()
-//                    title = info["title"] as! String
-//                    description = info["description"] as! String
-//                    id = info["ID"] as! String
-//                    location = info["location"] as! [Double]
-//                    pins.append(PinData(title: title, description: description, ID: id, locaiton: LocationData(latitude: location[0], longitude: location[1])))
-//                }
-//                NeighborhoodData.pins = pins
-//                completion()
-//            }
-//        }
-        completion()
     }
     
     @IBAction func createAccountBtn(_ sender: Any) {
