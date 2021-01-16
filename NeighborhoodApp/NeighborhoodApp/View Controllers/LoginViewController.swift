@@ -16,7 +16,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     private var pass = ""
     //instance data that represents whether user login is validated
     private var isAuthorized = false
-    
     let btnLoading = LoadingButton(text: "Enter", textColor: .white, bgColor: UIColor(red: 247, green: 247, blue: 247, alpha: 0))
    
     //outlets from storyboard
@@ -217,4 +216,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         performSegue(withIdentifier: "LoginToCreateAccount", sender: nil)
     }
     
+
 }

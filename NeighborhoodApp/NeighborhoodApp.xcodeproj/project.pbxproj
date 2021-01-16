@@ -34,6 +34,9 @@
 		C5D8E05C25AFB88300050EB3 /* or.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D8E05B25AFB88300050EB3 /* or.png */; };
 		C5D8E06925AFBBDF00050EB3 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */; };
 		C5D8E07325AFE67900050EB3 /* differentBar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D8E07225AFE67900050EB3 /* differentBar.png */; };
+		C5F21DBA25B2751F00D39B9F /* ViewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F21DB925B2751F00D39B9F /* ViewPinViewController.swift */; };
+		C5F21DBF25B2963900D39B9F /* CurrentlySelectedPinInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F21DBE25B2963900D39B9F /* CurrentlySelectedPinInformation.swift */; };
+		C5F21DC525B2B08500D39B9F /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F21DC425B2B08500D39B9F /* arrow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,9 @@
 		C5D8E05B25AFB88300050EB3 /* or.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = or.png; sourceTree = "<group>"; };
 		C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		C5D8E07225AFE67900050EB3 /* differentBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = differentBar.png; sourceTree = "<group>"; };
+		C5F21DB925B2751F00D39B9F /* ViewPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinViewController.swift; sourceTree = "<group>"; };
+		C5F21DBE25B2963900D39B9F /* CurrentlySelectedPinInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentlySelectedPinInformation.swift; sourceTree = "<group>"; };
+		C5F21DC425B2B08500D39B9F /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		ED72E141B6533EA7AEC97789 /* Pods-NeighborhoodAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeighborhoodAppTests.release.xcconfig"; path = "Target Support Files/Pods-NeighborhoodAppTests/Pods-NeighborhoodAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		F69B66D74B645987529525D0 /* Pods_NeighborhoodApp_NeighborhoodAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeighborhoodApp_NeighborhoodAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F957D3B868446854BC723982 /* Pods-NeighborhoodAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeighborhoodAppTests.debug.xcconfig"; path = "Target Support Files/Pods-NeighborhoodAppTests/Pods-NeighborhoodAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 		C51E536C25A9025A0065FF52 /* Image Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C5F21DC325B2B07300D39B9F /* account */,
 				C5D8E05A25AFB87400050EB3 /* Login */,
 				C5D8E05425AF9A6700050EB3 /* Pin Make */,
 				C51E537F25A903DC0065FF52 /* Home Image */,
@@ -175,6 +182,7 @@
 				C531ED3A25AB8AF7005FBE33 /* PinData.swift */,
 				C531ED3F25AB8B6E005FBE33 /* NeighborhoodData.swift */,
 				C531ED4925AB9C7B005FBE33 /* LocationData.swift */,
+				C5F21DBE25B2963900D39B9F /* CurrentlySelectedPinInformation.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -250,6 +258,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		C5F21DC325B2B07300D39B9F /* account */ = {
+			isa = PBXGroup;
+			children = (
+				C5F21DC425B2B08500D39B9F /* arrow.png */,
+			);
+			path = account;
+			sourceTree = "<group>";
+		};
 		C5F5AA4A25A5163100651AAB /* Setup Code */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +283,7 @@
 				C531ED4425AB8E31005FBE33 /* LoginViewController.swift */,
 				C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */,
 				C59A267825B1388000A5C593 /* MakePinViewController.swift */,
+				C5F21DB925B2751F00D39B9F /* ViewPinViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -395,6 +412,7 @@
 				C5933D2825AE3D1800949C1C /* Bar.png in Resources */,
 				C51E538125A904050065FF52 /* nav2.png in Resources */,
 				C51E538925A904BE0065FF52 /* account.png in Resources */,
+				C5F21DC525B2B08500D39B9F /* arrow.png in Resources */,
 				C5D8E05C25AFB88300050EB3 /* or.png in Resources */,
 				C547A93025A503D800441BC0 /* GoogleService-Info.plist in Resources */,
 				C547A90625A5030B00441BC0 /* Assets.xcassets in Resources */,
@@ -528,11 +546,13 @@
 			files = (
 				C5D8E06925AFBBDF00050EB3 /* CreateAccountViewController.swift in Sources */,
 				C531ED4A25AB9C7B005FBE33 /* LocationData.swift in Sources */,
+				C5F21DBF25B2963900D39B9F /* CurrentlySelectedPinInformation.swift in Sources */,
 				C547A8FD25A5030A00441BC0 /* AppDelegate.swift in Sources */,
 				C547A8FF25A5030A00441BC0 /* SceneDelegate.swift in Sources */,
 				C51E539725A914F10065FF52 /* AccountViewController.swift in Sources */,
 				C51E539225A9107B0065FF52 /* HomeViewController.swift in Sources */,
 				C531ED4525AB8E31005FBE33 /* LoginViewController.swift in Sources */,
+				C5F21DBA25B2751F00D39B9F /* ViewPinViewController.swift in Sources */,
 				C531ED4025AB8B6E005FBE33 /* NeighborhoodData.swift in Sources */,
 				C531ED3325AB8740005FBE33 /* PersonalData.swift in Sources */,
 				C59A267925B1388000A5C593 /* MakePinViewController.swift in Sources */,

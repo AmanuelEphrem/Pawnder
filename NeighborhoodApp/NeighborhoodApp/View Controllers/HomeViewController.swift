@@ -8,10 +8,9 @@
 import UIKit
 import MapKit
 import Firebase
-class HomeViewController: UIViewController, MKMapViewDelegate {
+class HomeViewController: UIViewController, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +112,17 @@ class HomeViewController: UIViewController, MKMapViewDelegate {
         mapView.centerCoordinate = cent
         mapView.setRegion(MKCoordinateRegion(center: cent, span: MKCoordinateSpan(latitudeDelta: scale, longitudeDelta: scale)), animated: true)
     }
+    
+/*defines action for pin tap*/
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        //saves current annotation in class
+        CurrentlySelectedPinInformation.title = view.annotation!.title!!
+        CurrentlySelectedPinInformation.description = view.annotation!.subtitle!!
+        
+        CurrentlySelectedPinInformation.location = LocationData(latitude: view.annotation!.coordinate.latitude.magnitude, longitude: (-1.0)*(view.annotation!.coordinate.longitude.magnitude))
+        performSegue(withIdentifier: "MapToPinView", sender: nil)
+    }
+    
     
 /*defines actions for tab icons*/
     //recenter tab pressed
