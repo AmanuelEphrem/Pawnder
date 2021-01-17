@@ -10,6 +10,10 @@ import UIKit
 class NeighborhoodData: NSObject {
     public static var boundaries = [LocationData](){
         didSet{
+            //makes sure boundaries has content
+            if(boundaries.count < 2){
+                return
+            }
             //compute centerLocation
             var centerLat = 0.0
             var centerLong = 0.0

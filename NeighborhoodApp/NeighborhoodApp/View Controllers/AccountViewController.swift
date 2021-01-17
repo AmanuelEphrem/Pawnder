@@ -24,6 +24,21 @@ class AccountViewController: UIViewController {
     }
     
     @IBAction func logoutBtn(_ sender: Any) {
+        //resets data
+        resetLocalData()
+        //changes view
         self.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
+    }
+    
+    //clears local data
+    private func resetLocalData(){
+       //reset necessary personal data
+        PersonalData.personalPins.removeAll()
+        PersonalData.pinHash.removeAll()
+        PersonalData.relationship.removeAll()
+        
+        //resets neighborhood Data
+        NeighborhoodData.boundaries.removeAll()
+        NeighborhoodData.pins.removeAll()
     }
 }

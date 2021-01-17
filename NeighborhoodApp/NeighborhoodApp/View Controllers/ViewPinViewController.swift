@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 class ViewPinViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,6 +28,8 @@ class ViewPinViewController: UIViewController, MKMapViewDelegate {
         
         //sets up UI for text
         setupUI()
+        
+        print(PersonalData.personalPins)
     }
     
     //sets up UI
@@ -40,11 +43,17 @@ class ViewPinViewController: UIViewController, MKMapViewDelegate {
         let pin = CLLocationCoordinate2D(latitude: CurrentlySelectedPinInformation.location.latitude, longitude: CurrentlySelectedPinInformation.location.longitude)
         mapView.centerCoordinate = pin
         mapView.setRegion(MKCoordinateRegion(center: pin, span: MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)), animated: true)
-        
+
         //presents delete button if user owns pin
         //currently functionality is not working
-        deleteBtnOutlet.alpha = 0
-        deleteBtnOutlet.isUserInteractionEnabled = false
+        if(CurrentlySelectedPinInformation.isUserPin == true){
+            deleteBtnOutlet.alpha = 1
+            deleteBtnOutlet.isUserInteractionEnabled = true
+        }else{
+            deleteBtnOutlet.alpha = 0
+            deleteBtnOutlet.isUserInteractionEnabled = false
+        }
+        
     }
     
     //marks point user clicked on map
@@ -58,7 +67,6 @@ class ViewPinViewController: UIViewController, MKMapViewDelegate {
     
 /*implements boundary for neighborhood*/
     func setNeighborhoodPerimeter(bounds:[LocationData], scale:Double){
-        
         var coords = [CLLocationCoordinate2D]()
         //converts boundary points to coordinates
         for point in bounds{
@@ -100,7 +108,59 @@ class ViewPinViewController: UIViewController, MKMapViewDelegate {
     //delets current post
     //not currently working
     @IBAction func deleteBtn(_ sender: Any) {
+        //attempts to delete pin
+        deleteCurrentAnnotation { (success) in
+            if(success == true){
+                //deletes from user database
+                self.deleteFromUser {
+                    self.presentingViewController?.dismiss(animated: true, completion: nil)
+                }
+            }else{
+                //give error animation
+            }
+        }
     }
+    //deletes current annotation from neighborhood
+    func deleteCurrentAnnotation(completion: @escaping (Bool) -> Void){
+        let db = Firestore.firestore()
+        db.collection("neighborhood").document(NeighborhoodData.name).collection("pins").document(PersonalData.relationship[CurrentlySelectedPinInformation.hash]!).delete() { err in
+            if err != nil {
+                print("Error deleting pin")
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
+    //saves user changes to username data
+    func deleteFromUser(completion: @escaping () -> Void){
+        let db = Firestore.firestore()
+        removeElement(value: PersonalData.relationship[CurrentlySelectedPinInformation.hash]!)
+        db.collection("users").document(PersonalData.username).updateData([
+            "pins": PersonalData.personalPins
+        ]) { err in
+            if err != nil {
+                print("Error writing document in join neighborhood:")
+                completion()
+            } else {
+                completion()
+            }
+        }
+    }
+    //removes specified value from copy of personal pins
+    private func removeElement(value:String){
+        let value = PersonalData.relationship[CurrentlySelectedPinInformation.hash]!
+        if(PersonalData.personalPins[0] == value){
+            PersonalData.personalPins[0] = String(-1)
+        }
+        if(PersonalData.personalPins[1] == value){
+            PersonalData.personalPins[1] = String(-1)
+        }
+        if(PersonalData.personalPins[2] == value){
+            PersonalData.personalPins[2] = String(-1)
+        }
+    }
+    
     //disables/enables map movement. Acts as a switch
     @IBAction func lockBtn(_ sender: Any) {
         //changes ui

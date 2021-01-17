@@ -57,7 +57,7 @@ class CreateAccountViewController: UIViewController {
     func sendUserInfo(completion: @escaping () -> Void){
         let username = usernameTextField.text!.lowercased()
         let password = passwordTextField.text!
-        let neighborhoodID = -1
+        let neighborhoodID = ""
         let pins:[Int] = [-1,-1,-1]
         
         if(validateUserInput(username: username) == false){

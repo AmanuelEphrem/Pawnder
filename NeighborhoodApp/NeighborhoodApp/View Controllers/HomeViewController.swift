@@ -11,7 +11,7 @@ import Firebase
 class HomeViewController: UIViewController, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //draws neighborhood perimeter
@@ -19,11 +19,18 @@ class HomeViewController: UIViewController, MKMapViewDelegate{
         
         //listens for old and new pins
         pinListener()
+        
     }
      
 /*fetches pins from database in real-time*/
     //setup database listener
     func pinListener(){
+        //quits if there's no neighborhood
+        if(PersonalData.neighborhoodID == ""){
+            print("not part of a neighborhood...yet")
+            return
+        }
+        
         retrievePins {
             //adds pins to map
             self.displayAnnotations()
@@ -54,19 +61,51 @@ class HomeViewController: UIViewController, MKMapViewDelegate{
                         
                         //sets data
                         NeighborhoodData.pins.append(PinData(title: title, description: description, ID: id, locaiton: LocationData(latitude: location[0], longitude: location[1])))
+                        
+                    }else if(diff.type == .removed){
+                        let identification = diff.document.data()["ID"] as! String
+                        self.removePinFromCollection(identification: identification)
+                        self.displayAnnotations()
                     }
                 }
             completion()
             }
         
     }
+    //returns annotation with corresponding hash
+    private func findAnnotation(hash:Int) -> MKAnnotation{
+        for annotation in mapView.annotations{
+            if(annotation.hash == hash){
+                return annotation
+            }
+        }
+        return MKPointAnnotation()
+    }
+    //removes pin with corresponding has from array
+    private func removePinFromCollection(identification:String){
+        print(NeighborhoodData.pins.count)
+        for index in 0...NeighborhoodData.pins.count-1{
+            if(NeighborhoodData.pins[index].ID == identification){
+                NeighborhoodData.pins.remove(at: index)
+                return
+            }
+        }
+    }
     //defines and displays annotations for users neighborhood
     private func displayAnnotations(){
+        //clears all annotations
+        mapView.removeAnnotations(mapView.annotations)
         for pin in NeighborhoodData.pins{
+            //adds annotations
             let annotation = MKPointAnnotation()
             annotation.title = pin.title
             annotation.subtitle = pin.description
             annotation.coordinate = CLLocationCoordinate2D(latitude: pin.locaiton.latitude, longitude: pin.locaiton.longitude)
+            //checks if this pin is users
+            if(PersonalData.personalPins.contains(pin.ID) == true){
+                PersonalData.pinHash.append(annotation.hash)
+                PersonalData.relationship[annotation.hash] = pin.ID
+            }
             mapView.addAnnotation(annotation)
         }
     }
@@ -74,6 +113,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate{
 /*implements boundary for neighborhood*/
     //defines boundaries that represents the users neighborhood
     func setNeighborhoodPerimeter(bounds:[LocationData], scale:Double){
+        //quits if there's no neighborhood
+        if(PersonalData.neighborhoodID == ""){
+            print("not part of a neighborhood...yet")
+            return
+        }
         
         var coords = [CLLocationCoordinate2D]()
         //converts boundary points to coordinates
@@ -108,9 +152,33 @@ class HomeViewController: UIViewController, MKMapViewDelegate{
     }
     //realigns map to users neighborhood
     func recenterMap(scale:Double){
+        //quits if there's no neighborhood
+        if(PersonalData.neighborhoodID == ""){
+            print("not part of a neighborhood...yet")
+            return
+        }
+        
         let cent = CLLocationCoordinate2D(latitude: NeighborhoodData.centerLocation.latitude, longitude: NeighborhoodData.centerLocation.longitude)
         mapView.centerCoordinate = cent
         mapView.setRegion(MKCoordinateRegion(center: cent, span: MKCoordinateSpan(latitudeDelta: scale, longitudeDelta: scale)), animated: true)
+    }
+    //prevents disappearing annotations
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseIdentifier = "annotationView"
+        var view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        if #available(iOS 11.0, *) {
+            if view == nil {
+                view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            }
+            view?.displayPriority = .required
+        } else {
+            if view == nil {
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            }
+        }
+        view?.annotation = annotation
+        view?.canShowCallout = true
+        return view
     }
     
 /*defines action for pin tap*/
@@ -118,8 +186,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate{
         //saves current annotation in class
         CurrentlySelectedPinInformation.title = view.annotation!.title!!
         CurrentlySelectedPinInformation.description = view.annotation!.subtitle!!
-        
         CurrentlySelectedPinInformation.location = LocationData(latitude: view.annotation!.coordinate.latitude.magnitude, longitude: (-1.0)*(view.annotation!.coordinate.longitude.magnitude))
+        CurrentlySelectedPinInformation.isUserPin = PersonalData.pinHash.contains(view.annotation!.hash)
+        CurrentlySelectedPinInformation.hash = view.annotation!.hash
+        
+        //changes view
         performSegue(withIdentifier: "MapToPinView", sender: nil)
     }
     

@@ -11,5 +11,8 @@ class PersonalData: NSObject {
     public static var username = ""
     public static var password = ""
     public static var neighborhoodID = ""
-    public static var personalPins = [Int]()
+    public static var personalPins = [String]()
+    public static var pinHash = [Int]()
+    public static var relationship = [Int:String]()
+    
 }

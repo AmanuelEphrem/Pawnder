@@ -107,10 +107,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     @IBAction func enterBtn(_ sender: Any) {
         //resets UI
         resetTextfieldUI()
+        
+        
         ///
         ///
         ///
-        ///edited here
+        ///edited here below
         ///
         ///
         ///
@@ -119,6 +121,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         //pass = passwordTextfield.text!  ///uncomment
         user = "bobby"
         pass = "stevenwills980"
+        ///
+        ///
+        ///
+        ///edited here above
+        ///
+        ///
+        ///
+        
         
         //validates username accordance with firebase criterion
         if(validateUsernameInput(username: user) == false){
@@ -164,7 +174,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 PersonalData.username = dataDescription["username"]! as! String
                 PersonalData.password = tempPassword
                 PersonalData.neighborhoodID = dataDescription["neighborhoodID"]! as! String
-                PersonalData.personalPins = dataDescription["pins"] as! [Int]
+                PersonalData.personalPins = dataDescription["pins"] as! [String]
                 
                 //validates user
                 self.isAuthorized = true
@@ -178,9 +188,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
     }
     func retrieveNeighborhoodData(completion: @escaping () -> Void){
+        //quits if there's no neighborhood
+        if(PersonalData.neighborhoodID == ""){
+            print("not part of a neighborhood...yet")
+            completion()
+            return
+        }
+        
         let db = Firestore.firestore()
         let ref = db.collection("neighborhood").document(PersonalData.neighborhoodID)
 
+        
         //retrives neighborhood data
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -199,6 +217,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 NeighborhoodData.boundaries =  vals
                 
                 //saves neighborhood data
+                NeighborhoodData.name = PersonalData.neighborhoodID
                 NeighborhoodData.code = dataDescription["code"] as! Int
                 NeighborhoodData.password = dataDescription["password"] as! String
                 NeighborhoodData.description = dataDescription["description"] as! String

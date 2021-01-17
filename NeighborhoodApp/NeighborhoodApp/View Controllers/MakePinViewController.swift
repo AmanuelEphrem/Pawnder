@@ -25,6 +25,7 @@ class MakePinViewController: UIViewController, MKMapViewDelegate{
     private var annotationTitle = "New Annotation"
     private var annotationDescription = ""
     private var currentAnnotation:MKPointAnnotation? = nil
+    private var documentID = ""
     private var success = false
     let btnLoading = LoadingButton(text: "Enter", textColor: .white, bgColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0))
     
@@ -71,11 +72,19 @@ class MakePinViewController: UIViewController, MKMapViewDelegate{
         
         //writes data to database while showing loading animation
         startLoading()
-        writeAnnotationToDatabase {
-            //ends loading animation because writing has ended
-            self.endLoading()
+        updateUserPins {
+
             if(self.success == true){
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
+                //make changes to user profile to document change
+                self.writeAnnotationToDatabase {
+                    //ends loading animation because writing has ended
+                    self.endLoading()
+                    //changes view
+                    self.presentingViewController?.dismiss(animated: true, completion: nil)
+                }
+            }else{
+                //ends loading animation because writing has ended
+                self.endLoading()
             }
         }
         
@@ -84,13 +93,13 @@ class MakePinViewController: UIViewController, MKMapViewDelegate{
     func writeAnnotationToDatabase(completion: @escaping () -> Void){
         //writes data to database
         let db = Firestore.firestore()
-        let docID = UUID().uuidString
+
         let location:[Double] = [currentAnnotation!.coordinate.latitude.magnitude,(currentAnnotation!.coordinate.longitude.magnitude * -1.0)]
-        db.collection("neighborhood").document(PersonalData.neighborhoodID).collection("pins").document(docID).setData([
+        db.collection("neighborhood").document(PersonalData.neighborhoodID).collection("pins").document(documentID).setData([
             "title": annotationTitle,
             "description": annotationDescription,
             "location": location,
-            "ID": String(docID)
+            "ID": String(documentID)
         ]) { err in
             if err != nil {
                 print("error uploading annotation to database!")
@@ -102,7 +111,51 @@ class MakePinViewController: UIViewController, MKMapViewDelegate{
             }
         }
     }
+    //updates user pins
+    func updateUserPins(completion: @escaping () -> Void){
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document(PersonalData.username)
+        
+        //creates document id
+        let docid = UUID().uuidString
+        
+        //makes sure changes need to be written
+        if(placePinAppropriately(pinID: docid) == false){
+            self.success = false
+            completion()
+            return
+        }
+        
+        //save docid
+        documentID = docid
+        
+        // updates pins data field
+        docRef.updateData([
+            "pins": PersonalData.personalPins
+        ]) { err in
+            if err != nil {
+                print("Error updating user personal pin data when creating pin")
+                self.titleError()
+                self.descriptionError()
+                self.success = false
+                completion()
+            } else {
+                self.success = true
+                completion()
+            }
+        }
+    }
     
+    //helper function to appropriately place value in array
+    private func placePinAppropriately(pinID:String) -> Bool{
+        for index in 0...PersonalData.personalPins.count-1{
+            if(PersonalData.personalPins[index] == "-1"){
+                PersonalData.personalPins[index] = pinID
+                return true
+            }
+        }
+        return false
+    }
     
 /*defines UI error labels*/
     private func titleError(){
@@ -143,6 +196,11 @@ class MakePinViewController: UIViewController, MKMapViewDelegate{
 /*defines functions for mapkit*/
     //defines boundaries that represents the users neighborhood
     func setNeighborhoodPerimeter(bounds:[LocationData], scale:Double){
+        //quits if there's no neighborhood
+        if(PersonalData.neighborhoodID == ""){
+            print("not part of a neighborhood...yet")
+            return
+        }
         
         var coords = [CLLocationCoordinate2D]()
         //converts boundary points to coordinates
@@ -184,6 +242,12 @@ class MakePinViewController: UIViewController, MKMapViewDelegate{
     
     //plots annotation when user *double* taps screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //quits if there's no neighborhood
+        if(PersonalData.neighborhoodID == ""){
+            print("not part of a neighborhood...yet")
+            return
+        }
+        
         for touch in touches {
             let touchPoint = touch.location(in: mapView)
             let location = mapView.convert(touchPoint, toCoordinateFrom: mapView)
