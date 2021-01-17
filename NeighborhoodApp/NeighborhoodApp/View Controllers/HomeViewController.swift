@@ -84,6 +84,10 @@ class HomeViewController: UIViewController, MKMapViewDelegate{
     //removes pin with corresponding has from array
     private func removePinFromCollection(identification:String){
         print(NeighborhoodData.pins.count)
+        //if there are no pins exit
+        if(NeighborhoodData.pins.count <= 0){
+            return
+        }
         for index in 0...NeighborhoodData.pins.count-1{
             if(NeighborhoodData.pins[index].ID == identification){
                 NeighborhoodData.pins.remove(at: index)
