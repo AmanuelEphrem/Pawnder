@@ -58,7 +58,7 @@ class CreateAccountViewController: UIViewController {
         let username = usernameTextField.text!.lowercased()
         let password = passwordTextField.text!
         let neighborhoodID = ""
-        let pins:[Int] = [-1,-1,-1]
+        let pins:[String] = ["-1","-1","-1"]
         
         if(validateUserInput(username: username) == false){
             //username error

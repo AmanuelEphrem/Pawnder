@@ -108,28 +108,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         //resets UI
         resetTextfieldUI()
         
-        
-        ///
-        ///
-        ///
-        ///edited here below
-        ///
-        ///
-        ///
         //reads textfield values
-        //user = usernameTextfield.text!.lowercased() ///uncomment
-        //pass = passwordTextfield.text!  ///uncomment
-        user = "bobby"
-        pass = "stevenwills980"
-        ///
-        ///
-        ///
-        ///edited here above
-        ///
-        ///
-        ///
-        
-        
+        user = usernameTextfield.text!.lowercased() 
+        pass = passwordTextfield.text!
+        //user = "bobby"
+        //pass = "stevenwills980"
+
         //validates username accordance with firebase criterion
         if(validateUsernameInput(username: user) == false){
             usernameError()
