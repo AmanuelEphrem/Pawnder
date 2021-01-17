@@ -109,8 +109,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         resetTextfieldUI()
         
         //reads textfield values
-        user = usernameTextfield.text!.lowercased() 
+        user = usernameTextfield.text!.lowercased()
         pass = passwordTextfield.text!
+        print(user)
+        print(pass)
         //user = "bobby"
         //pass = "stevenwills980"
 
@@ -129,6 +131,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 self.retrieveNeighborhoodData(completion: {
                     self.performSegue(withIdentifier: "LoginToMap", sender: nil)
                     self.endLoadAnimation()
+                    //clear textfields
+                    self.usernameTextfield.text = ""
+                    self.passwordTextfield.text = ""
+                    self.user = ""
+                    self.pass = ""
                 })
             }
         })
@@ -151,6 +158,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 if(self.pass != tempPassword){
                     //wrong password
                     self.passwordWrong()
+                    self.isAuthorized = false
                     completion()
                     return
                 }

@@ -152,7 +152,19 @@ class JoinNeighborhoodViewController: UIViewController {
             if(self.isCredentialsGood == true){
                 //saves changes
                 self.saveNeighborhoodChanges {
-                    self.deleteUserPins {
+                    if(PersonalData.neighborhoodID != ""){
+                        self.deleteUserPins {
+                            //end loading animation
+                            self.endLoading()
+                            //changes saved, prompt user to log out
+                            self.groupLogIn()
+                            
+                            //reset values
+                            self.isCredentialsGood = false;
+                            self.newNeighborhood = ""
+                            //PersonalData.isLoggingOut = false
+                        }
+                    }else{
                         //end loading animation
                         self.endLoading()
                         //changes saved, prompt user to log out
