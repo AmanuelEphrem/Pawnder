@@ -38,6 +38,7 @@ class AccountViewController: UIViewController {
         PersonalData.relationship.removeAll()
         
         //resets neighborhood Data
+        NeighborhoodData.name = ""
         NeighborhoodData.boundaries.removeAll()
         NeighborhoodData.pins.removeAll()
     }
