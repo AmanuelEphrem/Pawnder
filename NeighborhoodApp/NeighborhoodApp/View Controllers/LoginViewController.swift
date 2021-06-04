@@ -11,20 +11,19 @@ import Firebase
 import MHLoadingButton
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
-    //instance data that represents user inputted values
-    private var user = ""
-    private var pass = ""
-    //instance data that represents whether user login is validated
-    private var isAuthorized = false
-    let btnLoading = LoadingButton(text: "Enter", textColor: .white, bgColor: UIColor(red: 247, green: 247, blue: 247, alpha: 0))
-   
     //outlets from storyboard
     @IBOutlet weak var enterOutlet: UIButton!
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    //check mark outlets
+    //checkmark outlets
     @IBOutlet weak var usernameX: UILabel!
     @IBOutlet weak var passwordX: UILabel!
+    
+    //user inputted username and password when submitBtn was fired
+    private var user = ""
+    private var pass = ""
+
+    let btnLoading = LoadingButton(text: "Enter", textColor: .white, bgColor: UIColor(red: 247, green: 247, blue: 247, alpha: 0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         
         }
     
-    //dismisses keyboard when screen is tapped
-    @IBAction func viewTap(_ sender: Any) {
-        view.endEditing(true)
-    }
-    
-    //animation for loading screen
+    //MARK: loading animation
     func startLoadAnimation(){
         btnLoading.alpha = 1
         enterOutlet.alpha = 0
@@ -60,7 +54,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         btnLoading.alpha = 0
     }
     
-    //displaying correct UI for textfields
+    //MARK: UI Functions
     func usernameError(){
         UIView.animate(withDuration: 0.5) {
             self.usernameX.alpha = 1
@@ -75,29 +69,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         usernameX.alpha = 0
         passwordX.alpha = 0
     }
-    
-    //enterBtn helper function
-    private func validateUsernameInput(username:String) -> Bool{
-        //makes sure username has contents
-        if(username == ""){
-            return false
-        }
-        
-        //loops username for each characte
-        let pattern = "[0-9]|[a-z]"
-        for letter in username{
-            if(matches(str:String(letter), pattern) == false){
-                return false
-            }
-        }
-        return true
+    func clearLoginScreenData(){
+        usernameTextfield.text = ""
+        passwordTextfield.text = ""
+        user = ""
+        pass = ""
+    }
+    @IBAction func createAccountBtn(_ sender: Any) {
+        performSegue(withIdentifier: "LoginToCreateAccount", sender: nil)
+    }
+    //dismisses keyboard when screen is tapped
+    @IBAction func viewTap(_ sender: Any) {
+        view.endEditing(true)
     }
     
-    //validateUsernameInput helper function
-    private func matches(str:String,_ regex: String) -> Bool {
-        return str.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
-    }
-    
+
+
+    //MARK: Login handling
     @IBAction func enterBtn(_ sender: Any) {
         //resets UI
         resetTextfieldUI()
@@ -110,35 +98,32 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         //user = "bobby"
         //pass = "stevenwills980"
 
-        //validates username accordance with firebase criterion
-        if(validateUsernameInput(username: user) == false){
+        //validates textfields (only validates username)
+        if(databaseSafeString(str: user) == false){
             usernameError()
             return
         }
         
-        //checks if login is correct
-        //user is granted access if and only if login is correct
-        retrievePersonalData(completion: {
-            if(self.isAuthorized){
-                //starts animation if access is granted
+        //downloads user authentication (username and password) from Firebase
+        //proceeds to home screen if authentication is correct
+        downloadPersonalData(completion: { isAuthorized in
+            if(isAuthorized == true){
                 self.startLoadAnimation()
-                self.retrieveNeighborhoodData(completion: {
-                    self.performSegue(withIdentifier: "LoginToMap", sender: nil)
+                
+                self.downloadNeighborhoodData(completion: { success in
                     self.endLoadAnimation()
-                    //clear textfields
-                    self.usernameTextfield.text = ""
-                    self.passwordTextfield.text = ""
-                    self.user = ""
-                    self.pass = ""
+                    
+                    if(success == false){
+                        print("Not part of a neighborhood...yet")
+                        return
+                    }
+                    self.performSegue(withIdentifier: "LoginToMap", sender: nil)
+                    self.clearLoginScreenData()
                 })
             }
         })
     }
-    
-    //downloads user data
-    //if user credentials are correct, data is saved and authorized to enter
-    //else the user is not authorized and data is not saved
-    func retrievePersonalData(completion: @escaping () -> Void){
+    private func downloadPersonalData(completion: @escaping (Bool) -> Void){
         let db = Firestore.firestore()
         let docRef = db.collection("users").document(user)
         
@@ -147,44 +132,37 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
             if let document = document, document.exists {
                 let dataDescription = document.data()!
                 
-                //checks login
-                let tempPassword = dataDescription["password"]! as! String
-                if(self.pass != tempPassword){
+                //validates login information (username already checked)
+                let expectedPassword = dataDescription["password"]! as! String
+                if(self.pass != expectedPassword){
                     //wrong password
                     self.passwordWrong()
-                    self.isAuthorized = false
-                    completion()
+                    completion(false)
                     return
                 }
                 //saves personal data
                 PersonalData.username = dataDescription["username"]! as! String
-                PersonalData.password = tempPassword
+                PersonalData.password = expectedPassword
                 PersonalData.neighborhoodID = dataDescription["neighborhoodID"]! as! String
                 PersonalData.personalPins = dataDescription["pins"] as! [String]
-                
-                //validates user
-                self.isAuthorized = true
-                completion()
+
+                completion(true)
             } else {
-                //denies access if username wrong
+                //username is wrong
                 self.usernameError()
-                self.isAuthorized = false
-                completion()
+                completion(false)
             }
         }
     }
-    func retrieveNeighborhoodData(completion: @escaping () -> Void){
+    private func downloadNeighborhoodData(completion: @escaping (Bool) -> Void){
         //quits if there's no neighborhood
         if(PersonalData.neighborhoodID == ""){
-            print("not part of a neighborhood...yet")
-            completion()
+            completion(false)
             return
         }
         
         let db = Firestore.firestore()
         let ref = db.collection("neighborhood").document(PersonalData.neighborhoodID)
-
-        
         //retrives neighborhood data
         ref.getDocument { (document, error) in
             if let document = document, document.exists {
@@ -210,16 +188,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                 NeighborhoodData.organizer = dataDescription["organizer"] as! String
                 
                 //returns completion
-                completion()
+                completion(true)
             } else {
-                print("Document does not exist")
+                completion(false)
             }
         }
     }
-    
-    @IBAction func createAccountBtn(_ sender: Any) {
-        performSegue(withIdentifier: "LoginToCreateAccount", sender: nil)
+    private func databaseSafeString(str:String) -> Bool{
+        //makes sure username has contents
+        if(str == ""){
+            return false
+        }
+        
+        //loops username for each characte
+        let pattern = "[0-9]|[a-z]"
+        for letter in str{
+            if(matches(str:String(letter), pattern) == false){
+                return false
+            }
+        }
+        return true
     }
-    
+    //databaseSafeString helper function
+    private func matches(str:String,_ regex: String) -> Bool {
+        return str.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
 
 }

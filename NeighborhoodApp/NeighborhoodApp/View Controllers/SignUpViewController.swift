@@ -1,5 +1,5 @@
 //
-//  CreateAccountViewController.swift
+//  SignUp.swift
 //  NeighborhoodApp
 //
 //  Created by Amanuel Ephrem on 1/13/21.
@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import MHLoadingButton
-class CreateAccountViewController: UIViewController {
+class SignUpViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!

@@ -32,7 +32,7 @@
 		C5933D2825AE3D1800949C1C /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5933D2725AE3D1800949C1C /* Bar.png */; };
 		C59A267925B1388000A5C593 /* MakePinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59A267825B1388000A5C593 /* MakePinViewController.swift */; };
 		C5D8E05C25AFB88300050EB3 /* or.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D8E05B25AFB88300050EB3 /* or.png */; };
-		C5D8E06925AFBBDF00050EB3 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */; };
+		C5D8E06925AFBBDF00050EB3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8E06825AFBBDF00050EB3 /* SignUpViewController.swift */; };
 		C5D8E07325AFE67900050EB3 /* differentBar.png in Resources */ = {isa = PBXBuildFile; fileRef = C5D8E07225AFE67900050EB3 /* differentBar.png */; };
 		C5F21DBA25B2751F00D39B9F /* ViewPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F21DB925B2751F00D39B9F /* ViewPinViewController.swift */; };
 		C5F21DBF25B2963900D39B9F /* CurrentlySelectedPinInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F21DBE25B2963900D39B9F /* CurrentlySelectedPinInformation.swift */; };
@@ -93,7 +93,7 @@
 		C5933D2725AE3D1800949C1C /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
 		C59A267825B1388000A5C593 /* MakePinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePinViewController.swift; sourceTree = "<group>"; };
 		C5D8E05B25AFB88300050EB3 /* or.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = or.png; sourceTree = "<group>"; };
-		C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		C5D8E06825AFBBDF00050EB3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C5D8E07225AFE67900050EB3 /* differentBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = differentBar.png; sourceTree = "<group>"; };
 		C5F21DB925B2751F00D39B9F /* ViewPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinViewController.swift; sourceTree = "<group>"; };
 		C5F21DBE25B2963900D39B9F /* CurrentlySelectedPinInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentlySelectedPinInformation.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 				C51E539125A9107B0065FF52 /* HomeViewController.swift */,
 				C51E539625A914F10065FF52 /* AccountViewController.swift */,
 				C531ED4425AB8E31005FBE33 /* LoginViewController.swift */,
-				C5D8E06825AFBBDF00050EB3 /* CreateAccountViewController.swift */,
+				C5D8E06825AFBBDF00050EB3 /* SignUpViewController.swift */,
 				C59A267825B1388000A5C593 /* MakePinViewController.swift */,
 				C5F21DB925B2751F00D39B9F /* ViewPinViewController.swift */,
 				C5F21DCF25B2BDC100D39B9F /* JoinNeighborhoodViewController.swift */,
@@ -559,7 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5D8E06925AFBBDF00050EB3 /* CreateAccountViewController.swift in Sources */,
+				C5D8E06925AFBBDF00050EB3 /* SignUpViewController.swift in Sources */,
 				C531ED4A25AB9C7B005FBE33 /* LocationData.swift in Sources */,
 				C5F21DBF25B2963900D39B9F /* CurrentlySelectedPinInformation.swift in Sources */,
 				C547A8FD25A5030A00441BC0 /* AppDelegate.swift in Sources */,

@@ -287,10 +287,10 @@
             </objects>
             <point key="canvasLocation" x="-107.24637681159422" y="39.508928571428569"/>
         </scene>
-        <!--Create Account View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="hWk-6e-okQ">
             <objects>
-                <viewController id="fAf-hE-Ttv" customClass="CreateAccountViewController" customModule="NeighborhoodApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fAf-hE-Ttv" customClass="SignUpViewController" customModule="NeighborhoodApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uYg-ap-2vT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
