@@ -22,9 +22,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var enterOutlet: UIButton!
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    ///check mark outlets
-    @IBOutlet weak var usernameCheck: UIImageView!
-    @IBOutlet weak var passwordCheck: UIImageView!
+    //check mark outlets
     @IBOutlet weak var usernameX: UILabel!
     @IBOutlet weak var passwordX: UILabel!
     
@@ -64,20 +62,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     
     //displaying correct UI for textfields
     func usernameError(){
-        usernameCheck.alpha = 0
         UIView.animate(withDuration: 0.5) {
             self.usernameX.alpha = 1
         }
     }
     func passwordWrong(){
-        passwordCheck.alpha = 0
         UIView.animate(withDuration: 0.5) {
             self.passwordX.alpha = 1
         }
     }
     func resetTextfieldUI(){
-        usernameCheck.alpha = 0
-        passwordCheck.alpha = 0
         usernameX.alpha = 0
         passwordX.alpha = 0
     }

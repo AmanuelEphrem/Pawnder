@@ -10,136 +10,181 @@ import Firebase
 import MHLoadingButton
 class CreateAccountViewController: UIViewController {
     
-    //outlet variables
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    
+    
     @IBOutlet weak var usernameX: UILabel!
     @IBOutlet weak var passwordX: UILabel!
+    @IBOutlet weak var phoneX: UILabel!
+    @IBOutlet weak var emailX: UILabel!
+    
+    
     @IBOutlet weak var submitOutlet: UIButton!
     
-    //instance data
-    private var success = false
-    let btnLoading = LoadingButton(text: "Enter", textColor: .white, bgColor: UIColor(red: 247, green: 247, blue: 247, alpha: 0))
+    private let btnLoading = LoadingButton(text: "Enter", textColor: .white, bgColor: UIColor(red: 247, green: 247, blue: 247, alpha: 0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setup loading button
+
         //creates loading button
-        btnLoading.frame = CGRect(x: 78, y: 411, width: 40, height: 40)
+        btnLoading.frame = CGRect(x: 78, y: 479, width: 40, height: 40)
         btnLoading.indicator = MaterialLoadingIndicator(color: .blue)
         btnLoading.isUserInteractionEnabled = false
         btnLoading.showLoader(userInteraction: true)
         btnLoading.alpha = 0
         self.view.addSubview(btnLoading)
         
-        //setup Error UI
         resetErrors()
 
         
     }
     
-    @IBAction func submitBtn(_ sender: Any) {
-        //clears visual errors
-        resetErrors()
-        
-        //attempts to writes to database
-        sendUserInfo(completion: {
-            //ends loading animation because writing has ended
-            self.endLoadingAnimation()
-            //exits view if write is successful
-            if(self.success == true){
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
-            }
-        })
-        
-    }
-    
-    func sendUserInfo(completion: @escaping () -> Void){
-        let username = usernameTextField.text!.lowercased()
-        let password = passwordTextField.text!
-        let neighborhoodID = ""
-        let pins:[String] = ["-1","-1","-1"]
-        
-        if(validateUserInput(username: username) == false){
-            //username error
-            usernameError()
-            success = false
-            completion()
-            return
-        }else if(password == ""){
-            //password error
-            passwordError()
-            success = false
-            completion()
-            return
-        }
-        
-        //begins loading animation because data is being written
-        startLoadingAnimation()
-        
-        //writes data
-        let db = Firestore.firestore()
-        db.collection("users").document(username).setData([
-            "username": username,
-            "password": password,
-            "neighborhoodID": neighborhoodID,
-            "pins":pins
-        ]) { err in
-            if let err = err {
-                //error writing data
-                self.success = false
-                self.usernameError()
-                completion()
-            } else {
-                //success writing
-                self.success = true
-                completion()
-            }
-        }
-        
-        
-    }
-    
-    //starts loading animation
-    func startLoadingAnimation(){
+    //MARK: loading animations
+    private func startLoadingAnimation(){
         btnLoading.alpha = 1
         submitOutlet.alpha = 0
     }
-    
-    func endLoadingAnimation(){
+    private func endLoadingAnimation(){
         btnLoading.alpha = 0
         submitOutlet.alpha = 1
     }
     
-    //displays visual username error
-    func usernameError(){
+    //MARK: UI functions
+    private func displayUsernameError(){
         usernameX.alpha = 0
         UIView.animate(withDuration: 0.5) {
             self.usernameX.alpha = 1
         }
     }
-    //displays visual password error
-    func passwordError(){
+    private func displayPasswordError(){
         passwordX.alpha = 0
         UIView.animate(withDuration: 0.5) {
             self.passwordX.alpha = 1
         }
     }
-    //resets username and password errors
-    func resetErrors(){
+    private func displayEmailError(){
+        emailX.alpha = 0
+        UIView.animate(withDuration: 0.5) {
+            self.emailX.alpha = 1
+        }
+    }
+    private func displayPhoneError(){
+        phoneX.alpha = 0
+        UIView.animate(withDuration: 0.5) {
+            self.phoneX.alpha = 1
+        }
+    }
+    private func resetErrors(){
         usernameX.alpha = 0
         passwordX.alpha = 0
+        emailX.alpha = 0
+        phoneX.alpha = 0
     }
-    //validates username according to firebase requirements
-    func validateUserInput(username:String) -> Bool{
-        //makes sure username has contents
-        if(username == ""){
+    //dismisses keyboard on screen tap
+    @IBAction func screenTap(_ sender: Any) {
+        view.endEditing(true)
+    }
+
+    
+    //MARK: Sign in handling
+    @IBAction func submitBtn(_ sender: Any) {
+        //clears UI errors
+        resetErrors()
+        
+        //attempts to write to database
+        let result = sendToDatabase()
+        
+        endLoadingAnimation()
+        if(result == true){
+            presentingViewController?.dismiss(animated: true, completion: nil)
+        }
+        
+    }
+    //writes new user data to Firebase if textfields are acceptable
+    private func sendToDatabase() -> Bool{
+        //data to write to Firebase
+        let username = (usernameTextField.text ?? "~//~").lowercased()
+        let password = passwordTextField.text ?? "~//~"
+        let neighborhoodID = ""
+        let email = emailTextField.text ?? "~//~"
+        let phone:String = phoneTextField.text ?? "xxx_xxx_xxxx"
+        
+        //textfield validation
+        //validates username textfield
+        var uiError = false
+        if(!databaseSafeString(str: username)){
+            //username error
+            displayUsernameError()
+            uiError = true
+        }
+        if(password == ""){
+            //password error
+            displayPasswordError()
+            uiError = true
+        }
+        if(email == "" || !email.contains("@")){
+            displayEmailError()
+            uiError = true;
+        }
+        if(phone == "" || phone == "xxx_xxx_xxxx" || phone.count < 10){
+            displayPhoneError()
+            uiError = true;
+        }
+        if(uiError == true){
             return false
         }
         
-        //loops username for each characte
+    
+        startLoadingAnimation()
+        //writes specified data to Firebase
+        return writeToDatabase(username: username, password: password, neighborhoodID: neighborhoodID, email: email, phone: phone, completion: { success in
+            if(success == false){
+                self.displayUsernameError()
+            }
+        })
+        
+    }
+    
+    private func writeToDatabase(username:String, password:String, neighborhoodID:String, email: String, phone:String, completion: @escaping (Bool) -> Void) -> Bool{
+        //MARK: - Backdoor -
+        return true
+        
+        let db = Firestore.firestore()
+        var error:Bool = false
+        
+        db.collection("users").document(username).setData([
+            "username": username,
+            "password": password,
+            "neighborhoodID": neighborhoodID,
+            "email":email,
+            "phone":phone
+        ]) { err in
+            if let _ = err {
+                //error writing data
+                completion(false)
+                error = true
+            } else {
+                //success in writing data
+                completion(true)
+                error = false
+            }
+        }
+        
+        return !error
+    }
+    
+    //determines whether a string is able to be stored in Firebase
+    private func databaseSafeString(str:String) -> Bool{
+        //makes sure username has contents
+        if(str == ""){
+            return false
+        }
+        //loops username for each character
         let pattern = "[0-9]|[a-z]"
-        for letter in username{
+        for letter in str{
             if(matches(str:String(letter), pattern) == false){
                 return false
             }
@@ -151,9 +196,6 @@ class CreateAccountViewController: UIViewController {
         return str.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
 
-    @IBAction func screenTap(_ sender: Any) {
-        view.endEditing(true)
-    }
     
     
 }

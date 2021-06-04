@@ -246,16 +246,6 @@
                                 <rect key="frame" x="68" y="396" width="278" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T9X-KP-AGE" userLabel="usernameCheck">
-                                <rect key="frame" x="318" y="332" width="20" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemGreenColor"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZAY-xw-5Hu" userLabel="passwordCheck">
-                                <rect key="frame" x="318" y="378" width="20" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemGreenColor"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4OY-5C-IuF" userLabel="usernameX">
                                 <rect key="frame" x="321" y="330" width="14" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -280,10 +270,8 @@
                     </view>
                     <connections>
                         <outlet property="enterOutlet" destination="GKv-Mm-EDh" id="Ue0-H3-jX0"/>
-                        <outlet property="passwordCheck" destination="ZAY-xw-5Hu" id="Hcw-zc-0Zt"/>
                         <outlet property="passwordTextfield" destination="GUp-7c-rJd" id="Y5t-FG-AFu"/>
                         <outlet property="passwordX" destination="Pf2-zE-X7B" id="241-Wy-HpJ"/>
-                        <outlet property="usernameCheck" destination="T9X-KP-AGE" id="Gmm-BC-T1e"/>
                         <outlet property="usernameTextfield" destination="aPi-Uk-2AE" id="ncd-i2-7EE"/>
                         <outlet property="usernameX" destination="4OY-5C-IuF" id="LvD-Is-63Z"/>
                         <segue destination="FC9-0b-A00" kind="presentation" identifier="LoginToMap" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="vaB-NZ-5Di"/>
@@ -314,12 +302,12 @@
                                 <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GAo-tM-SF8">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GAo-tM-SF8">
                                 <rect key="frame" x="68" y="380" width="244" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="differentBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="mOU-Lz-BEf">
                                 <rect key="frame" x="68" y="411" width="278" height="21"/>
@@ -391,7 +379,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="differentBar.png" translatesAutoresizingMaskIntoConstraints="NO" id="eE6-df-1Ta">
                                 <rect key="frame" x="68" y="456" width="278" height="21"/>
@@ -407,8 +395,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="FUM-fs-PPO"/>
                     <connections>
+                        <outlet property="emailTextField" destination="QAr-h0-mTX" id="ZMp-D9-ugK"/>
+                        <outlet property="emailX" destination="8YH-ZB-Efr" id="gie-TR-mVL"/>
                         <outlet property="passwordTextField" destination="TQn-P7-cwE" id="15L-ex-j9Y"/>
                         <outlet property="passwordX" destination="PoC-XP-vOb" id="8bs-jm-Mcg"/>
+                        <outlet property="phoneTextField" destination="GAo-tM-SF8" id="p8m-5g-B4O"/>
+                        <outlet property="phoneX" destination="aPR-W3-LNo" id="ozB-EQ-pjH"/>
                         <outlet property="submitOutlet" destination="Sqa-6O-Z5J" id="Y6P-AK-yoy"/>
                         <outlet property="usernameTextField" destination="EAA-OI-at4" id="pcZ-JA-meg"/>
                         <outlet property="usernameX" destination="QfP-hd-WUT" id="BKi-gS-DEZ"/>
@@ -794,16 +786,12 @@
         <image name="account.png" width="43" height="43"/>
         <image name="arrow.png" width="38" height="17"/>
         <image name="backarrow.png" width="15" height="17"/>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="differentBar.png" width="310" height="1"/>
         <image name="location.png" width="56" height="56"/>
         <image name="lock.fill" catalog="system" width="128" height="128"/>
         <image name="map.png" width="28" height="41"/>
         <image name="nav2.png" width="414" height="141"/>
         <image name="or.png" width="350" height="20"/>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
